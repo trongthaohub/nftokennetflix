@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Tools | Kiểm Tra Cookies</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="dabilux-nuoi-than-widget" class="dabilux-nuoi-than-container">
+
+        <!-- Nội dung ẩn (QR Code) -->
+        <div class="dabilux-nuoi-than-popup-content">
+            <img src="https://img.vietqr.io/image/mbbank-066775-compact2.jpg?addInfo=donate%5C&accountName=Nguyen%20Trong%20Thao"
+                alt="QR Code" class="dabilux-nuoi-than-qr-image">
+            <p class="dabilux-nuoi-than-donate-text">Chủ web đói quá<br>xin được nuôi 🍜</p>
+        </div>
+
+        <!-- Nút kích hoạt -->
+        <div class="dabilux-nuoi-than-trigger-wrapper" onclick="dabiluxNuoiThanToggle()">
+            <img src="https://wordpress.thompbui.com/wp-content/uploads/2025/12/an-xin.png" alt="Support Me"
+                class="dabilux-nuoi-than-trigger-btn">
+            <span class="dabilux-nuoi-than-cta-text">Kích vào em đi</span>
+        </div>
+
+    </div>
+    <div class="netflix-bg">
+        <div class="netflix-overlay"></div>
+    </div>
+
+    <nav class="netflix-navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <div class="netflix-logo">NETFLIX</div>
+                <!-- Mobile Browse Dropdown -->
+                <div class="mobile-browse" id="mobile-browse-btn">
+                    Duyệt tìm <i class="fas fa-caret-down"></i>
+                </div>
+                <!-- Desktop Navbar links -->
+                <div class="navbar-links">
+                    <div class="nav-tab active" data-tab="single">Nhập Đơn</div>
+                    <div class="nav-tab" data-tab="batch">Xử Lý Hàng Loạt</div>
+                    <div class="nav-tab" data-tab="about">Giới Thiệu</div>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="nav-icon"><i class="fas fa-bell"></i></div>
+                <div class="profile-avatar">
+                    <img src="avt.png" alt="Avatar">
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobile-menu">
+            <div class="mobile-menu-content">
+                <i class="fas fa-caret-up menu-arrow"></i>
+                <div class="mobile-nav-item active" data-tab="single">Trang chủ</div>
+                <div class="mobile-nav-item" data-tab="batch">Xử lý hàng loạt</div>
+                <div class="mobile-nav-item" data-tab="about">Giới thiệu</div>
+                <div class="mobile-nav-item"><a href="https://t.me/czabcdb" target="_blank"
+                        style="color: inherit; text-decoration: none;">Hỗ trợ Telegram</a></div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="netflix-main">
+        <!-- Promo Banner -->
+        <div class="promo-banner">
+            <div class="promo-content">
+                <div class="badge">CODERENT.ONE</div>
+                <h1>THUÊ CODE TỰ ĐỘNG</h1>
+                <p>Hệ thống thuê code, quét data, chạy ads tự động chuyên nghiệp tại coderent.one. Uy tín - Chất lượng.
+                </p>
+                <div class="promo-btns">
+                    <a href="https://coderent.one/" target="_blank" class="promo-btn primary"><i
+                            class="fas fa-play"></i> Thuê ngay</a>
+                    <a href="https://coderent.one/" target="_blank" class="promo-btn secondary"><i
+                            class="fas fa-info-circle"></i> Khám phá</a>
+                </div>
+            </div>
+            <div class="promo-fade"></div>
+        </div>
+
+        <!-- Single Input -->
+        <div class="tab-content active" id="single-tab">
+            <div class="hero-container">
+                <div class="login-box">
+                    <h1>Kiểm tra Cookies</h1>
+
+                    <div class="input-wrapper">
+                        <textarea id="cookie-input" class="netflix-input"
+                            placeholder="Dán cookies của bạn tại đây..."></textarea>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="small-btn" id="load-file-btn" title="Tải tệp"><i
+                                class="fas fa-upload"></i></button>
+                        <button class="small-btn" id="paste-btn" title="Dán"><i class="fas fa-paste"></i></button>
+                        <button class="small-btn clear" id="clear-btn" title="Xóa"><i class="fas fa-trash"></i></button>
+                    </div>
+
+                    <div class="options-row">
+                        <div class="mode-select" id="mode-toggle">
+                            <span class="mode-option active" data-mode="fullinfo">Thông tin đầy đủ</span>
+                            <span class="mode-option" data-mode="tokenonly">Chỉ Token</span>
+                        </div>
+                    </div>
+
+                    <button class="netflix-btn-primary" id="generate-btn">KIỂM TRA NGAY</button>
+
+                    <div class="progress-section">
+                        <div class="progress-text">
+                            <span id="status">Sẵn sàng</span>
+                            <span id="progress-percent">0%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="progress"></div>
+                        </div>
+                    </div>
+
+                    <div class="telegram-minimal">
+                        <label class="check-container">
+                            <input type="checkbox" id="telegram-toggle">
+                            <span class="checkmark"></span>
+                            Bật gửi Telegram
+                        </label>
+                        <div id="telegram-config" class="tg-config hide">
+                            <input type="text" id="bot-token" class="netflix-input-small" placeholder="Bot Token">
+                            <input type="text" id="chat-id" class="netflix-input-small" placeholder="Chat ID">
+                            <button class="tg-test-btn" id="test-telegram-btn">Test</button>
+                        </div>
+                        <div id="telegram-status" class="tg-status-text">Telegram: Tắt</div>
+                    </div>
+                </div>
+
+                <div class="results-panel">
+                    <div class="panel-header">
+                        <h2>KẾT QUẢ CHI TIẾT</h2>
+                        <button class="copy-results-btn" id="copy-results-btn" disabled>SAO CHÉP</button>
+                    </div>
+                    <div class="results-scroll" id="results">
+                        <div class="empty-state">
+                            <i class="fas fa-cookie-bite"></i>
+                            <p>Kết quả sẽ hiển thị tại đây...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Batch Processing -->
+        <div class="tab-content" id="batch-tab">
+            <div class="hero-container">
+                <div class="login-box batch-box">
+                    <h1>Xử Lý Hàng Loạt</h1>
+
+                    <div class="upload-zone" onclick="document.getElementById('batch-files').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Kéo thả tệp Cookies vào đây hoặc nhấn để chọn</p>
+                        <input type="file" id="batch-files" multiple accept=".txt,.json,.zip" hidden>
+                    </div>
+
+                    <div class="selected-files-list">
+                        <div class="list-title">Tệp đã chọn (<span id="total-files">0</span>)</div>
+                        <div class="files-container" id="file-list">
+                            <div class="empty-list-text">Chưa có tệp nào</div>
+                        </div>
+                    </div>
+
+                    <div class="stats-minimal">
+                        <div class="stat"><span id="valid-files">0</span> Hợp lệ</div>
+                        <div class="stat"><span id="invalid-files">0</span> Lỗi</div>
+                    </div>
+
+                    <button class="netflix-btn-primary" id="process-batch-btn">BẮT ĐẦU XỬ LÝ</button>
+
+                    <div class="progress-section">
+                        <div class="progress-text">
+                            <span id="batch-status">Sẵn sàng</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="batch-progress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-panel">
+                    <div class="panel-header">
+                        <h2>KẾT QUẢ HÀNG LOẠT</h2>
+                        <button class="copy-results-btn" id="save-results-btn" disabled>LƯU TỆP</button>
+                    </div>
+                    <div class="results-scroll batch-scroll" id="batch-results">
+                        <div class="empty-state">
+                            <i class="fas fa-layer-group"></i>
+                            <p>Đang chờ tệp tin...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="tab-content" id="about-tab">
+            <div class="about-container">
+                <div class="about-card">
+                    <h1>Về Netflix Checker</h1>
+                    <p class="subtitle">Công cụ trích xuất và tạo Login Token chuyên nghiệp.</p>
+
+                    <div class="features-grid">
+                        <div class="feature">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Tốc độ cao</h3>
+                            <p>Xử lý hàng trăm cookies trong tích tắc.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>An toàn</h3>
+                            <p>Tạo token trực tiếp không qua server trung gian.</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fab fa-telegram"></i>
+                            <h3>Tiện lợi</h3>
+                            <p>Thông báo kết quả về Telegram ngay lập tức.</p>
+                        </div>
+                    </div>
+
+                    <div class="footer-note">
+                        <p>Bản quyền thuộc về <a href="https://coderent.one/" target="_blank"
+                                style="color: var(--netflix-red); text-decoration: none; font-weight: bold;">TrThaoDev -
+                                CodeRent.one</a> | 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="netflix-notification" id="notification">Thông báo</div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

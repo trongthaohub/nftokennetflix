@@ -1,0 +1,1263 @@
+:root {
+    --netflix-red: #e50914;
+    --netflix-red-hover: #b20710;
+    --netflix-black: #000000;
+    --netflix-dark-grey: #141414;
+    --netflix-grey: #333333;
+    --netflix-light-grey: #b3b3b3;
+    --input-bg: #333333;
+    --card-bg: rgba(0, 0, 0, 0.75);
+    --transition: all 0.25s cubic-bezier(0.5, 0, 0.1, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--netflix-black);
+    color: white;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Netflix Background Poster Wall */
+.netflix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-image: url('https://assets.nflxext.com/ffe/siteui/vlv3/9c5457b8-9ab0-4a04-9fc1-e608d5670f71/5f05e8e9-8c1b-4304-b202-4c6e5b8f20e5/US-en-20210719-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+}
+
+.netflix-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+/* Top Navbar */
+.netflix-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    padding: 0 4%;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    transition: background 0.3s ease;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    backdrop-filter: blur(5px);
+}
+
+.navbar-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.netflix-logo {
+    color: var(--netflix-red);
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    cursor: pointer;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-tab {
+    font-size: 0.85rem;
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+    opacity: 0.8;
+    font-weight: 500;
+    padding: 10px 0;
+    border-bottom: 3px solid transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-tab:hover,
+.nav-tab.active {
+    opacity: 1;
+}
+
+.nav-tab.active {
+    font-weight: 700;
+    border-color: var(--netflix-red);
+}
+
+/* Icons and Avatar */
+.nav-icon {
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: white;
+    opacity: 0.9;
+}
+
+.profile-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mobile Browse Button */
+.mobile-browse {
+    display: none;
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    justify-content: center;
+}
+
+.mobile-menu-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.mobile-menu-content {
+    background: rgba(10, 10, 10, 0.98);
+    width: 280px;
+    position: absolute;
+    top: 20px;
+    padding: 15px 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.menu-arrow {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(10, 10, 10, 0.98);
+    font-size: 1.2rem;
+}
+
+.mobile-nav-item {
+    width: 100%;
+    padding: 18px 20px;
+    text-align: center;
+    color: #b3b3b3;
+    font-weight: 500;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.mobile-nav-item:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-nav-item.active {
+    color: white;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.author-link {
+    color: white;
+    text-decoration: none;
+    background: var(--netflix-red);
+    padding: 7px 17px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.author-link:hover {
+    background: var(--netflix-red-hover);
+}
+
+/* Promo Banner / Featured Billboard */
+.promo-banner {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('ads.gif');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    margin-bottom: 30px;
+    /* Changed from -50px to positive margin */
+    z-index: 1;
+}
+
+.promo-content {
+    max-width: 600px;
+}
+
+.promo-content .badge {
+    background: #e50914;
+    color: white;
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    font-weight: 900;
+    display: inline-block;
+    margin-bottom: 15px;
+    border-radius: 2px;
+}
+
+.promo-content h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.promo-content p {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin-bottom: 25px;
+    color: #e5e5e5;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.promo-btns {
+    display: flex;
+    gap: 15px;
+}
+
+.promo-btn {
+    padding: 10px 25px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+.promo-btn.primary {
+    background: white;
+    color: black;
+}
+
+.promo-btn.primary:hover {
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.promo-btn.secondary {
+    background: rgba(109, 109, 110, 0.7);
+    color: white;
+}
+
+.promo-btn.secondary:hover {
+    background: rgba(109, 109, 110, 0.4);
+}
+
+.promo-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, var(--netflix-black), transparent);
+}
+
+@media (max-width: 768px) {
+    .promo-banner {
+        height: auto;
+        aspect-ratio: 16 / 8;
+        padding: 0;
+        margin-bottom: 25px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-color: #000;
+        background-image: url('ads.gif');
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .promo-content {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background: none;
+        padding: 5px;
+    }
+
+    .promo-fade {
+        display: none;
+    }
+
+    .promo-content .badge {
+        font-size: 0.6rem;
+        padding: 2px 6px;
+        margin-bottom: 4px;
+        background: #e50914;
+    }
+
+    .promo-content h1 {
+        font-size: 1.2rem;
+        margin-bottom: 6px;
+        color: white;
+    }
+
+    .promo-content p {
+        display: none;
+    }
+
+    .promo-btns {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .promo-btn {
+        padding: 8px 18px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Main Content Area */
+.netflix-main {
+    padding-top: 70px;
+    /* Adjusted since navbar is 70px */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Stack banner and content */
+    align-items: center;
+}
+
+.tab-content {
+    display: none;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 450px 1fr;
+    gap: 40px;
+    width: 100%;
+}
+
+@media (max-width: 1100px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 850px;
+        margin: 0 auto;
+    }
+
+    .results-panel {
+        height: auto;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .netflix-main {
+        padding: 90px 5px 30px 5px;
+    }
+
+    .tab-content {
+        padding: 5px;
+    }
+
+    .netflix-navbar {
+        height: 60px;
+    }
+
+    .netflix-logo {
+        font-size: 1.5rem;
+    }
+
+    .navbar-links {
+        display: none;
+        /* Hide desktop tabs */
+    }
+
+    .mobile-browse {
+        display: flex;
+    }
+
+    .navbar-right {
+        gap: 15px;
+    }
+
+    .nav-icon {
+        font-size: 1.2rem;
+    }
+
+    .profile-avatar {
+        width: 30px;
+        height: 30px;
+    }
+
+    .login-box {
+        padding: 0 4%;
+        min-height: auto;
+        background-color: transparent !important;
+        box-shadow: none;
+    }
+
+    .login-box h1 {
+        font-size: 2.2rem;
+        text-align: center;
+        white-space: normal;
+        word-break: break-word;
+        margin-bottom: 30px;
+        line-height: 1.2;
+    }
+
+    .hero-container {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .netflix-main {
+        padding: 85px 5px 20px 5px;
+    }
+
+    .navbar-container {
+        flex-direction: row;
+        gap: 10px;
+        justify-content: space-between;
+    }
+
+    .navbar-left {
+        gap: 15px;
+    }
+
+    .netflix-logo {
+        font-size: 1.4rem;
+    }
+
+    .mobile-browse {
+        font-size: 0.85rem;
+    }
+
+    .login-box h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Login-style Box */
+.login-box {
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    width: 100%;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-box h1 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.input-wrapper {
+    margin-bottom: 10px;
+}
+
+.netflix-input {
+    width: 100%;
+    background: var(--input-bg);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 16px;
+    font-size: 1rem;
+    min-height: 200px;
+    resize: vertical;
+    transition: var(--transition);
+}
+
+.netflix-input:focus {
+    background: #454545;
+    outline: none;
+}
+
+/* Control Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.small-btn {
+    flex: 1;
+    background: #555;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.small-btn:hover {
+    background: #666;
+}
+
+.small-btn.clear {
+    background: rgba(229, 9, 20, 0.2);
+    color: var(--netflix-red);
+}
+
+.small-btn.clear:hover {
+    background: rgba(229, 9, 20, 0.4);
+}
+
+/* Mode Select */
+.options-row {
+    margin-bottom: 25px;
+}
+
+.mode-select {
+    display: flex;
+    background: #333;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.mode-option {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: var(--transition);
+    color: #999;
+}
+
+.mode-option.active {
+    background: #444;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Primary Button */
+.netflix-btn-primary {
+    width: 100%;
+    background: var(--netflix-red);
+    color: white;
+    border: none;
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 25px;
+    transition: var(--transition);
+}
+
+.netflix-btn-primary:hover {
+    background: var(--netflix-red-hover);
+}
+
+.netflix-btn-primary:active {
+    transform: scale(0.98);
+}
+
+/* Progress Section */
+.progress-section {
+    margin-bottom: 20px;
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--netflix-light-grey);
+    margin-bottom: 8px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 4px;
+    background: #555;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--netflix-red);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* Telegram Minimal */
+.telegram-minimal {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+}
+
+.check-container {
+    display: block;
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--netflix-light-grey);
+    user-select: none;
+}
+
+.check-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #737373;
+    border-radius: 2px;
+}
+
+.check-container:hover input~.checkmark {
+    background-color: #999;
+}
+
+.check-container input:checked~.checkmark {
+    background-color: white;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.check-container input:checked~.checkmark:after {
+    display: block;
+}
+
+.check-container .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 4px;
+    height: 10px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.tg-config {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.tg-config.hide {
+    display: none;
+}
+
+.netflix-input-small {
+    flex: 1;
+    background: #333;
+    border: 1px solid #444;
+    color: white;
+    padding: 8px;
+    font-size: 0.8rem;
+    border-radius: 2px;
+}
+
+.tg-test-btn {
+    background: #555;
+    border: none;
+    color: white;
+    padding: 0 15px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.tg-status-text {
+    font-size: 0.8rem;
+    color: var(--netflix-light-grey);
+}
+
+/* Results Panel */
+.results-panel {
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    height: 700px;
+}
+
+.panel-header {
+    padding: 25px 30px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-header h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--netflix-light-grey);
+}
+
+.copy-results-btn {
+    background: transparent;
+    border: 1px solid #555;
+    color: white;
+    padding: 6px 15px;
+    font-size: 0.8rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.copy-results-btn:hover:not(:disabled) {
+    background: #333;
+}
+
+.copy-results-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.results-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.results-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.results-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.results-scroll::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+/* Result Items Style */
+.result-block {
+    background: #181818;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    border: 1px solid #222;
+}
+
+.result-block-header {
+    background: #222;
+    padding: 12px 20px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-block-content {
+    padding: 20px;
+}
+
+/* Success/Error tags */
+.tag {
+    padding: 3px 8px;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.tag.success {
+    background: #2ecc71;
+    color: black;
+}
+
+.tag.error {
+    background: #e50914;
+    color: white;
+}
+
+/* Batch Box Specifics */
+.batch-box {
+    min-height: auto;
+}
+
+.upload-zone {
+    border: 2px dashed #444;
+    border-radius: 4px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 25px;
+}
+
+.upload-zone:hover {
+    border-color: var(--netflix-red);
+    background: rgba(229, 9, 20, 0.05);
+}
+
+.upload-zone i {
+    font-size: 2.5rem;
+    color: var(--netflix-red);
+    margin-bottom: 15px;
+}
+
+.selected-files-list {
+    margin-bottom: 25px;
+}
+
+.list-title {
+    font-size: 0.9rem;
+    color: var(--netflix-light-grey);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.files-container {
+    background: #181818;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 5px;
+}
+
+.file-row {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #222;
+}
+
+.file-row:last-child {
+    border-bottom: none;
+}
+
+.stats-minimal {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.stat {
+    flex: 1;
+    background: #181818;
+    padding: 15px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.stat span {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--netflix-red);
+}
+
+/* About Screen */
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.about-card {
+    background: var(--card-bg);
+    padding: 60px;
+    border-radius: 4px;
+    max-width: 800px;
+    text-align: center;
+}
+
+.about-card h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    color: var(--netflix-light-grey);
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 600px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .about-card {
+        padding: 40px 20px;
+    }
+}
+
+.feature i {
+    font-size: 2rem;
+    color: var(--netflix-red);
+    margin-bottom: 15px;
+}
+
+.feature h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 0.9rem;
+    color: var(--netflix-light-grey);
+}
+
+.footer-note {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Notification */
+.netflix-notification {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: white;
+    color: black;
+    padding: 15px 30px;
+    border-radius: 4px;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: translateY(200%);
+    transition: transform 0.4s cubic-bezier(0.5, 0, 0.1, 1);
+    z-index: 1001;
+}
+
+.netflix-notification.show {
+    transform: translateY(0);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.empty-state {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #444;
+    text-align: center;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+/* Spinner */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Info Grid internally */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #222;
+}
+
+.info-label {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.info-value {
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.token-area {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #333;
+}
+
+.token-box {
+    background: #000;
+    padding: 12px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.75rem;
+    word-break: break-all;
+    margin: 10px 0;
+    border: 1px solid #222;
+}
+
+.copy-token-btn {
+    background: #333;
+    border: none;
+    color: white;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.copy-token-btn:hover {
+    background: #444;
+}
+
+.dabilux-nuoi-than-container {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    font-family: sans-serif;
+}
+
+.dabilux-nuoi-than-trigger-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 50;
+}
+
+@keyframes dabilux-nuoi-than-pulse-zoom {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.dabilux-nuoi-than-trigger-btn {
+    width: 60px;
+    height: auto;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+    animation: dabilux-nuoi-than-pulse-zoom 2s infinite ease-in-out;
+}
+
+.dabilux-nuoi-than-trigger-wrapper:hover .dabilux-nuoi-than-trigger-btn {
+    animation-play-state: paused;
+    transform: scale(1.2);
+}
+
+.dabilux-nuoi-than-container.active .dabilux-nuoi-than-trigger-btn {
+    animation: none;
+    transform: rotate(-15deg);
+}
+
+.dabilux-nuoi-than-cta-text {
+    font-size: 11px;
+    font-weight: bold;
+    color: #d32f2f;
+    background-color: #ffeb3b;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-top: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    animation: dabilux-nuoi-than-bounce-text 2s infinite 1s;
+}
+
+@keyframes dabilux-nuoi-than-bounce-text {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.dabilux-nuoi-than-popup-content {
+    position: absolute;
+    right: 80px;
+    top: 50%;
+    transform: translateY(-50%) scale(0);
+    transform-origin: right center;
+    width: 250px;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    text-align: center;
+    z-index: 40;
+}
+
+.dabilux-nuoi-than-container.active .dabilux-nuoi-than-popup-content {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.dabilux-nuoi-than-qr-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.dabilux-nuoi-than-donate-text {
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.dabilux-nuoi-than-popup-content::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 8px 0 8px 8px;
+    border-color: transparent transparent transparent white;
+}
+
+@media (max-width: 400px) {
+    .dabilux-nuoi-than-popup-content {
+        width: 200px;
+    }
+
+    .dabilux-nuoi-than-donate-text {
+        font-size: 12px;
+    }
+}
