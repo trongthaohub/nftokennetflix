@@ -85,7 +85,7 @@ To enable Telegram notifications:
 ## 📸 Interface Preview
 
 <div align="center">
-  <img src="https://via.placeholder.com/800x450/141414/E50914?text=Netflix+Tools+Dashboard+Preview" alt="App Preview" border-radius="10px">
+  <img src="image.png" alt="App Preview" border-radius="10px">
 </div>
 
 ---
