@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Owner credit
-OWNER_CREDIT = "t.me/still_alivenow (Ichigo Kurosaki)"
+OWNER_CREDIT = "t.me/czabcb (TrongThao Tech)"
 
 # Telegram configuration (will be set by user)
 TELEGRAM_CONFIG = {
